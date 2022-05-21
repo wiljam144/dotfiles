@@ -1,0 +1,201 @@
+[colors]
+bg-dark = #0F111B
+;bg-light = #686f9a
+bg-light = #2e3459
+;bg-light = #3D44C8
+;font = #f4efe0
+font = #ffffff
+icon-bg = #2e3459
+
+[bar/mybar]
+monitor = "eDP-1"
+background = #0F111B
+font-0 = "Hack:pixelsize=10:antialias=true;3"
+font-1 = "Hack:pixelsize=15:antialias=true;3"
+font-2 = "Noto Sans Buhid:pixelsize=15;antialias=true;3"  
+font-3 = "Weather Icons:size=10;3"
+separator = ""
+line-size = 2
+height = 20
+
+modules-center = left-separator-light calendar right-separator-light
+modules-right = left-separator-light cpu left-separator-dark temperature left-separator-light memory left-separator-dark battery
+modules-left = ewmh right-separator-dark spotify right-separator-light
+
+[module/icon]
+type = custom/text
+content = " ᝆ "
+content-foreground = ${colors.font}
+content-background = ${colors.icon-bg}
+label-active-font = 2
+content-font = 2
+
+[module/icon-separator]
+type = custom/text
+content = " "
+label-active-font = 1
+content-font = 2
+content-foreground = ${colors.icon-bg}
+content-background = ${colors.bg-dark}
+
+[module/right-separator-dark]
+type = custom/text
+content = " "
+label-active-font = 1
+content-foreground = ${colors.bg-dark}
+content-background = ${colors.bg-light}
+content-font = 2
+
+[module/right-separator-light]
+type = custom/text
+content = " "
+label-active-font = 1
+content-foreground = ${colors.bg-light}
+content-background = ${colors.bg-dark}
+content-font = 2
+
+[module/left-separator-dark]
+type = custom/text
+content = " "
+label-active-font = 1
+content-foreground = ${colors.bg-dark}
+content-background = ${colors.bg-light}
+content-font = 2
+
+[module/left-separator-light]
+type = custom/text
+content = " "
+label-active-font = 1
+content-foreground = ${colors.bg-light}
+content-background = ${colors.bg-dark}
+content-font = 2
+
+[module/battery]
+type = internal/battery
+full-at = 97
+battery = BAT0
+adapter = ADP1
+poll-interval = 5 
+format-charging = "<label-charging>"
+format-discharging = "<label-discharging>"
+label-charging = " BAT+ %percentage% "
+label-discharging = " BAT %percentage% "
+label-full = " BAT MAX  " 
+label-low = " BAT LOW "
+
+[module/date]
+type = internal/date
+date = %d-%m-%Y
+time = %H:%M:%S
+label = " %date% "
+format-background = ${colors.bg-light}
+format-foreground = ${colors.font}
+
+[module/time]
+type = internal/date
+date = %d-%m-%Y
+time = %H:%M:%S
+label = " %time% "
+format-background = ${colors.bg-light}
+format-foreground = ${colors.font}
+
+[module/calendar]
+type = custom/script
+exec = ~/.config/polybar/custom/popup-calendar.sh
+interval = 1
+click-left = ~/.config/polybar/custom/popup-calendar.sh --popup &
+format-background = ${colors.bg-light}
+format-foreground = ${colors.font}
+
+[module/weather]
+type = custom/script
+exec = ~/.config/polybar/custom/weather.sh
+interval = 10
+label-font = 3
+
+[module/pacman-aurhelper]
+type = custom/script
+exec = ~/.config/polybar/custom/pacman-aurhelper.sh
+interval = 1
+
+[module/pulseaudio]
+type = internal/pulseaudio
+sink = alsa_output.pci-0000_00_1f.3.analog-stereo
+interval = 5
+;format-volume = " VOL <label-volume>"
+label-volume = " VOL %percentage%% "
+label-muted = " MUT %percentage%% "
+
+[module/spotify]
+type = custom/script
+interval = 1
+format = "<label> "
+exec = python /home/wiljam/.config/polybar/custom/spotify.py -f '{artist}: {song}'
+click-left = playerctl --player=spotify play-pause 
+click-right = playerctl --player=spotify next 
+click-middle = playerctl --player=spotify previous
+format-background = ${colors.bg-light}
+format-foreground = ${colors.font}
+
+[module/cpu]
+type = internal/cpu
+label = " CPU %percentage%%"
+format-background = ${colors.bg-light}
+format-foreground = ${colors.font}
+
+[module/temperature]
+type = internal/temperature
+interval = 0.5
+thermal-zone = 0 
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp2_input
+warn-temperature = 80
+label = " TEMP %temperature-c%"
+
+[module/memory]
+type = internal/memory
+label = " RAM %gb_used%"
+format-background = ${colors.bg-light}
+format-foreground = ${colors.font}
+
+[module/ewmh]
+type = internal/xworkspaces
+pin-workspaces = false
+enable-click = true
+enable-scroll = false
+reverse-scroll = false
+fuzzy-match = true
+
+icon-0 = 1;
+icon-1 = 2;
+icon-2 = 3;
+icon-3 = 4;
+icon-4 = 5;
+icon-5 = 6;
+icon-6 = 7;
+icon-7 = 8;
+icon-8 = 9;
+icon-9 = 10;
+icon-default =
+
+format = "<label-state> "
+label-monitor = %name%
+
+;label-active = " ● "
+label-active = " %name% "
+label-active-foreground = ${colors.font}
+label-active-background = #0F111B
+label-active-underline = ${colors.font}
+
+;label-occupied = " ○ "
+label-occupied = " %name% "
+label-occupied-foreground = #F4EFE0
+label-occupied-background = #0F11B
+
+
+label-urgent = " %name "
+label-urgent-foreground = #F4EFE0
+label-urgent-background = #FF0000
+
+label-empty = ""
+label-empty-foreground = ${colors.dimgray}
+label-empty-background = ${colors.background}
