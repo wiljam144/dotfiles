@@ -1,0 +1,250 @@
+[bar/mybar]
+monitor = "HDMI-1"
+background = #121217
+font-0 = "Hack:pixelsize=10:antialias=true;3"
+font-1 = "Hack:pixelsize=15:antialias=true;3"
+font-2 = "Noto Sans Buhid:pixelsize=15;antialias=true;3"  
+font-3 = "Weather Icons:size=10;3"
+separator = ""
+line-size = 2
+height = 25
+override-redirect = false
+
+modules-right = temperature cpu memory calendar
+modules-left = dwm
+modules-center = dwm-title
+
+[module/separator]
+type = custom/text
+content = "●"
+
+[module/icon]
+type = custom/text
+content = " ᝆ "
+content-foreground = ${colors.font}
+content-background = ${colors.icon-bg}
+label-active-font = 2
+content-font = 2
+
+[module/icon-separator]
+type = custom/text
+content = " "
+label-active-font = 1
+content-font = 2
+content-foreground = ${colors.icon-bg}
+content-background = ${colors.bg-dark}
+
+[module/right-separator-dark]
+type = custom/text
+content = " "
+label-active-font = 1
+content-foreground = ${colors.bg-dark}
+content-background = ${colors.bg-light}
+content-font = 2
+
+[module/right-separator-light]
+type = custom/text
+content = " "
+label-active-font = 1
+content-foreground = ${colors.bg-light}
+content-background = ${colors.bg-dark}
+content-font = 2
+
+[module/left-separator-dark]
+type = custom/text
+content = " "
+label-active-font = 1
+content-foreground = ${colors.bg-dark}
+content-background = ${colors.bg-light}
+content-font = 2
+
+[module/left-separator-light]
+type = custom/text
+content = " "
+label-active-font = 1
+content-foreground = ${colors.bg-light}
+content-background = ${colors.bg-dark}
+content-font = 2
+
+[module/cava]
+type = custom/script
+tail = true
+exec = ~/.config/polybar/custom/cava.sh
+label = %output%
+format = "<label>"
+format-background = ${colors.bg-dark}
+format-foreground = ${colors.font}
+
+[module/date]
+type = internal/date
+date = %d-%m-%Y
+time = %H:%M:%S
+label = " %date% "
+format-background = ${colors.bg-light}
+format-foreground = ${colors.font}
+
+[module/time]
+type = internal/date
+date = %d-%m-%Y
+time = %H:%M:%S
+label = " %time% "
+format-background = ${colors.bg-light}
+format-foreground = ${colors.font}
+
+[module/calendar]
+type = custom/script
+exec = ~/.config/polybar/custom/popup-calendar.sh
+interval = 1
+click-left = ~/.config/polybar/custom/popup-calendar.sh --popup &
+label-background = #2B3328
+
+[module/weather]
+type = custom/script
+exec = ~/.config/polybar/custom/weather.sh
+interval = 10
+label-font = 3
+
+[module/pacman-aurhelper]
+type = custom/script
+exec = ~/.config/polybar/custom/pacman-aurhelper.sh
+interval = 1
+
+[module/pulseaudio]
+type = internal/pulseaudio
+sink = alsa_output.pci-0000_00_1f.3.analog-stereo
+interval = 5
+;format-volume = " VOL <label-volume>"
+label-volume = " VOL %percentage%% "
+label-muted = " MUT %percentage%% "
+
+[module/spotify]
+type = custom/script
+interval = 1
+format = "<label> "
+exec = python3 /home/wiljam/.config/polybar/custom/spotify.py -f '{artist}: {song}'
+click-left = playerctl --player=spotify play-pause 
+click-right = playerctl --player=spotify next 
+click-middle = playerctl --player=spotify previous
+format-background = ${colors.bg-light}
+format-foreground = ${colors.font}
+
+[module/cpu]
+type = internal/cpu
+label = " CPU %percentage%% "
+format-background = #223249
+format-foreground = ${colors.font}
+
+[module/temperature]
+type = internal/temperature
+interval = 0.5
+thermal-zone = 3
+warn-temperature = 80
+label = " TEMP %temperature-c% "
+format-background = #49443C
+
+[module/memory]
+type = internal/memory
+label = " RAM %gb_used%/%gb_total% "
+label-background = #43242B
+
+[module/ewmh]
+type = internal/xworkspaces
+pin-workspaces = false
+enable-click = true
+enable-scroll = false
+reverse-scroll = false
+fuzzy-match = true
+
+icon-0 = 1;
+icon-1 = 2;
+icon-2 = 3;
+icon-3 = 4;
+icon-4 = 5;
+icon-5 = 6;
+icon-6 = 7;
+icon-7 = 8;
+icon-8 = 9;
+icon-9 = 10;
+icon-default =
+
+format = "<label-state> "
+label-monitor = %name%
+
+;label-active = " ● "
+label-active = " %name% "
+label-active-foreground = ${colors.font}
+label-active-background = #0F111B
+label-active-underline = ${colors.font}
+
+;label-occupied = " ○ "
+label-occupied = " %name% "
+label-occupied-foreground = #F4EFE0
+label-occupied-background = #0F11B
+
+
+label-urgent = " %name "
+label-urgent-foreground = #F4EFE0
+label-urgent-background = #FF0000
+
+label-empty = ""
+label-empty-foreground = ${colors.dimgray}
+label-empty-background = ${colors.background}
+
+[module/dwm-title]
+type = internal/dwm
+format = <label-title>
+
+[module/dwm]
+type = internal/dwm
+format = <label-tags>
+;socket-path = /tmp/dwm.sock
+
+enable-tags-click = true
+enable-tags-scroll = true
+tags-scroll-empty = false
+tags-scroll-reverse = false
+tags-scroll-wrap = true
+enable-layout-click = true
+enable-layout-scroll = true
+layout-scroll-wrap = true
+layout-scroll-reverse = true
+
+secondary-layout-symbol = [M]
+
+
+label-floating = F
+
+; focused = Active tag on focused monitor
+label-focused = "&%name%"
+label-focused-background = ${colors.tag-focused-background}
+label-focused-foreground = ${colors.foreground}
+label-focused-padding = 2
+label-focused-font = 7
+
+; unfocused = Inactive tag on any monitor
+label-unfocused ="%name%"
+label-unfocused-background = ${colors.tag-unfocused-background}
+label-unfocused-foreground = ${colors.foreground}
+label-unfocused-padding = 2
+label-unfocused-font = 7
+
+; visible = Active tag on unfocused monitor
+label-visible = "%name%"
+label-visible-background = ${colors.tag-visible-background}
+label-visible-foreground = ${colors.foreground}
+label-visible-padding = 2
+label-visible-font = 7
+
+; urgent = Tag with urgency hint set
+label-urgent = "%name"
+label-urgent-background = ${colors.tag-urgent-background}
+label-urgent-padding = 2
+label-urgent-font = 7
+
+; empty = Tags with no windows assigned
+; This can be set to an empty string to hide empty tags
+label-empty =""
+
+; Separator in between workspaces
+#label-separator = |
+label-active-font = 0

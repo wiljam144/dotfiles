@@ -1,0 +1,62 @@
+window {
+    width: 30%;
+    border-radius: 20;
+    padding: 20;
+    background-color: #2A2A37;
+}
+
+inputbar {
+    border: 4;
+    padding: 4;
+    border-radius: 3;
+    border-color: #2A2A37;
+    background-color: #2A2A37;
+    text-color: #ffffff;
+}
+
+prompt {
+    background-color: #2A2A37;
+    text-color: #ffffff;
+}
+
+entry {
+    background-color: #2A2A37;
+    text-color: #ffffff;
+}
+
+mainbox {
+    background-color: #2A2A37;
+}
+
+case-indicator {
+    background-color: #2A2A37;
+}
+
+message {
+    background-color: #2A2A37;
+}
+
+textbox {
+    background-color: #2A2A37;
+}
+
+listview {
+    lines: 10;
+    background-color: #2A2A37;
+}
+
+element {
+    background-color: #2A2A37;
+}
+
+element-text {
+    padding: 7;
+    border-radius: 10;
+    background-color: #2A2A37;
+    highlight: underline;
+    text-color: #ffffff;
+}
+
+element-text selected {
+    background-color: #54546D;
+}

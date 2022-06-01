@@ -1,0 +1,11 @@
+@theme "theme"
+configuration {
+    modi: [drun,run,window,ssh];
+    font: "hack 12";
+    show-icons: false;
+    kb-row-up: "Alt+[45]";
+    kb-row-down: "Alt+[44]";
+    drun {
+        display-name: "Run ";
+    }
+}
